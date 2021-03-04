@@ -13,7 +13,7 @@ namespace RecipeAPI.Data
         Task CreateRecipe(Recipe recipe);
         Task<bool> SaveChanges();
         void DeleteRecipe(Recipe recipe);
-        void UpdateRecipePut(Recipe recipe);
+        void UpdateRecipe(Recipe recipe);
 
     }
 }

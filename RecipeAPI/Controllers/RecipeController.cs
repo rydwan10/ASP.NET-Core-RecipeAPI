@@ -96,7 +96,7 @@ namespace RecipeAPI.Controllers
             }
 
             _mapper.Map(updatedRecipeData, recipeFromRepo);
-            _repository.UpdateRecipePut(recipeFromRepo);
+            _repository.UpdateRecipe(recipeFromRepo);
             await _repository.SaveChanges();
 
             return StatusCode(200, new { status = "success", statusCode = 200, message = $"Recipe with id {id} is successfully updated with PUT method!" });
@@ -122,7 +122,7 @@ namespace RecipeAPI.Controllers
             }
 
             _mapper.Map(recipeToBePatched, recipeFromRepo);
-            _repository.UpdateRecipePut(recipeFromRepo);
+            _repository.UpdateRecipe(recipeFromRepo);
             await _repository.SaveChanges();
 
             return StatusCode(200, new { status = "success", statusCode = 200, message = $"Recipe with id {id} is successfully updated with PATCH method!" });
