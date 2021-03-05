@@ -62,9 +62,11 @@ namespace RecipeAPI.Controllers
             await _repository.CreateRecipe(recipeModel);
             await _repository.SaveChanges();
 
-            var convertRecipeToReadDto = _mapper.Map<RecipeReadDto>(recipeModel);
+            //var convertRecipeToReadDto = _mapper.Map<RecipeReadDto>(recipeModel);
 
-            return CreatedAtRoute(nameof(GetRecipeById), new { Id = convertRecipeToReadDto.Id }, new { status = "created", statusCode = 201, message = "New data is successfully created!", data = convertRecipeToReadDto });
+            var findCreatedRecipe = await _repository.GetRecipeById(recipeModel.Id);
+
+            return CreatedAtRoute(nameof(GetRecipeById), new { Id = findCreatedRecipe.Id }, new { status = "created", statusCode = 201, message = "New data is successfully created!", data = findCreatedRecipe });
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecipeAPI.Models;
+using System.ComponentModel.DataAnnotations;
 namespace RecipeAPI.Dtos
 {
     public class RecipeCreateDto
@@ -11,5 +12,10 @@ namespace RecipeAPI.Dtos
         [Required]
         public string Description { get; set; }
         public string Time { get; set; }
+       
+        [Required]
+        public int? ChefId { get; set; }
+        [Required]
+        public int? ChefForeignKey { get; set; }
     }
 }

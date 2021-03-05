@@ -13,7 +13,7 @@ namespace RecipeAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(230)", maxLength: 230, nullable: false),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Specialist = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,21 +29,34 @@ namespace RecipeAPI.Migrations
                     Name = table.Column<string>(type: "nvarchar(240)", maxLength: 240, nullable: false),
                     Ingredient = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ChefId = table.Column<int>(type: "int", nullable: true),
+                    ChefForeignKey = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipes", x => x.Id);
+                    table.ForeignKey(
+                        name: "ForeignKey_Recipe_Chef",
+                        column: x => x.ChefId,
+                        principalTable: "Chefs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recipes_ChefId",
+                table: "Recipes",
+                column: "ChefId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Chefs");
+                name: "Recipes");
 
             migrationBuilder.DropTable(
-                name: "Recipes");
+                name: "Chefs");
         }
     }
 }

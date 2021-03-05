@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 namespace RecipeAPI.Models
 {
     public class Chef
@@ -11,6 +12,7 @@ namespace RecipeAPI.Models
         public string Name { get; set; }
 
         [Required]
-        public string Position { get; set; }
+        public string Specialist { get; set; }
+        public List<Recipe> Recipes { get; set; }
     }
 }

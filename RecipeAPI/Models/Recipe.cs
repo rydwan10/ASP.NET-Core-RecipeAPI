@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecipeAPI.Models
 {
@@ -14,5 +16,9 @@ namespace RecipeAPI.Models
         [Required]
         public string Description { get; set; }
         public string Time { get; set; }
+        
+        public int? ChefId { get; set; }
+        [ForeignKey("ChefForeignKey")]
+        public Chef Chef { get; set; }
     }
 }

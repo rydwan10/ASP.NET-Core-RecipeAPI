@@ -33,13 +33,14 @@ namespace RecipeAPI.Data
 
         public async Task<IEnumerable<Recipe>> GetAllRecipes()
         {
-            var result = await _context.Recipes.ToListAsync();
+            var result = await _context.Recipes.Include(c => c.Chef).ToListAsync();
             return result;
         }
 
         public async Task<Recipe> GetRecipeById(int id)
         {
-            var result = await _context.Recipes.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _context.Recipes.Include(c => c.Chef).FirstOrDefaultAsync(x => x.Id == id);
+            
             return result;
         }
 
@@ -48,7 +49,7 @@ namespace RecipeAPI.Data
             return await _context.SaveChangesAsync() >= 0;
         }
 
-        public void UpdateRecipePut(Recipe recipe)
+        public void UpdateRecipe(Recipe recipe)
         {
             //
         }

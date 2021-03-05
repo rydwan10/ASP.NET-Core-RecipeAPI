@@ -31,7 +31,10 @@ namespace RecipeAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // ADD THIS FOR PATCH FUNCTIONALITY
-            services.AddControllers().AddNewtonsoftJson(s => { s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver(); });
+            services.AddControllers().AddNewtonsoftJson(s => { 
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                s.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             
             services.AddScoped<IRecipeRepo, SqlRecipeRepo>();
             services.AddDbContext<RecipeContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("RecipeConnection")));
